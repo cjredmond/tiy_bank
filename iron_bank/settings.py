@@ -27,7 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'banker'
+    'banker',
+    'rest_framework.authtoken',
+    'api_banker',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>create</h1>
+<h1>Insufficient Funds</h1>
+<h2>{{ request.user }}</h2>
 <form class="" action="" method="post">
   {% csrf_token %}
   {{ form }}

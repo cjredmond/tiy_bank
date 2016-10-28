@@ -1,19 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{{ request.user.id }}
+USER ID {{ request.user.id }}
 {% for x in trans %}
-{{ x.amount }}
+{{ x }}
 {% endfor %}
 <br>total: {{ balance }}
 
-
+<h3>{{ x }}</h3>
 <h2>New</h2>
 <form class="" action="{%  url 'transaction_create_view' %}" method="post">
         {% csrf_token %}
-         <input type="text" name="amount" value="">
-         <input type="submit" name="" value="Deposit">
+        <select name="trans_type">
+    <option value="+">Deposit</option>
+    <option value="-">Withraw</option>
+  </select>
+         <input type="number" step=".01" name="amount" value="">
+         <input type="submit" name="" value="Submit">
        </form>
+
+<h2>TRANSFER</h2>
+<form class="" action="{%  url 'transfer_create_view' %}" method="post">
+        {% csrf_token %}
+        Account ID:<input type="account" name="target" value="">
+         <input type="number" step=".01" name="amount" value="">
+         <input type="submit" name="" value="Submit">
+
+       </form>
+
+
+
 
 
 
