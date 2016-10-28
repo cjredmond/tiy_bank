@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{{ request.user.id }}
+{% for x in trans %}
+{{ x.amount }}
+{% endfor %}
+<br>total: {{ balance }}
+
+
+<h2>New</h2>
+<form class="" action="{%  url 'transaction_create_view' %}" method="post">
+        {% csrf_token %}
+         <input type="text" name="amount" value="">
+         <input type="submit" name="" value="Deposit">
+       </form>
+
+
+
+{% endblock %}
