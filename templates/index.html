@@ -1,8 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>index</h2>
+<h1 class="centered">The Iron Bank</h1>
 {{ request.user }}
-<a href="{% url 'login' %}">Login</a><br>
-<a href="{% url 'user_create_view' %}">Create User</a><br>
-<a href="{% url 'logout' %}">Logout</a>
+<div class="container">
+
+{% if not request.user.is_authenticated %}
+<div class="row">
+<div class="col-md-2">
+</div>
+<div class="col-md-8 index_items" style"text-align:center;">
+  <div class="index_link">
+<a href="{% url 'login' %}" class="index_link">Login</a><br>  </div>
+  <div class="index_link">
+<a href="{% url 'user_create_view' %}">Create User</a><br></div>
+</div>
+</div>
+{% else %}
+<div class="row">
+<div class="col-md-2">
+</div>
+<div class="col-md-8 index_items" style"text-align:center;">
+<div class="index_link"> <a href="{% url 'profile_view' %}">Account</a></div>
+<div class="index_link"><a href="{% url 'transaction_list_create_api_view'%}">API</a></div>
+<div class="index_link"><a href="{% url 'logout' %}">Logout</a></div>
+
+</div>
+</div>
+{% endif %}
+
+</div>
 {% endblock %}

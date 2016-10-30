@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from banker.models import Transaction, Account
 from django.core.urlresolvers import reverse, reverse_lazy
+from banker.forms import TransferForm
 
 def balance(user):
     trans = Transaction.objects.filter(account = user.account.id)
@@ -64,15 +65,13 @@ class TransactionCreateView(CreateView):
 
 class TransferCreateView(CreateView):
     model = Transaction
-    fields = ('amount',)
-    
+    fields = ("amount", "account")
+
     def get_success_url(self):
         return reverse('profile_view')
 
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.trans_type = "+"
-        x = target
-        instance.account = Accounts.objects.get(id=x)
         Transaction.objects.create(trans_type='-', amount=instance.amount, account=self.request.user.account)
         return super().form_valid(form)

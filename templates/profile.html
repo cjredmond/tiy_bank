@@ -22,9 +22,10 @@ USER ID {{ request.user.id }}
 <h2>TRANSFER</h2>
 <form class="" action="{%  url 'transfer_create_view' %}" method="post">
         {% csrf_token %}
-        Account ID:<input type="account" name="target" value="">
-         <input type="number" step=".01" name="amount" value="">
-         <input type="submit" name="" value="Submit">
+      {{ form }}
+      acc<input type="number" name="account" value="">
+      amount<input type="number" step=".01" name="amount" value="">
+      <input type="submit" name="" value="Submit">
 
        </form>
 
