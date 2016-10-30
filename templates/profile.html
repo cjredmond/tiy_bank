@@ -1,37 +1,62 @@
 {% extends 'base.html' %}
 {% block content %}
 
-USER ID {{ request.user.id }}
-{% for x in trans %}
-{{ x }}
-{% endfor %}
-<br>total: {{ balance }}
+{{ request.user.account.id }}
 
-<h3>{{ x }}</h3>
-<h2>New</h2>
-<form class="" action="{%  url 'transaction_create_view' %}" method="post">
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="nav navbar-nav">
+        <li><a href="{% url 'index_view' %}">Home</a></li>
+        <li><a href="{% url 'transaction_list_create_api_view' %}">API</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-5">
+      <h2 class="centered">Current Balance: {{ balance }}</h2>
+    <div class="row transaction">
+      <h3>Transaction</h3>
+      <form class="" action="{%  url 'transaction_create_view' %}" method="post">
         {% csrf_token %}
         <select name="trans_type">
-    <option value="+">Deposit</option>
-    <option value="-">Withraw</option>
-  </select>
+        <option value="+">Deposit</option>
+        <option value="-">Withraw</option>
+        </select>
          <input type="number" step=".01" name="amount" value="">
          <input type="submit" name="" value="Submit">
        </form>
+    </div>
+    <div class="row blank"></div>
+    <div class="row transaction">
+    <h3>TRANSFER</h3>
+    <form class="" action="{%  url 'transfer_create_view' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    Account #<input type="number" name="account" value="">
+    Amount<input type="number" step=".01" name="amount" value="">
+    <input type="submit" name="" value="Submit">
+    </form>
+</div>
+</div>
+  <div class="col-md-1">  </div>
+    <div class="col-md-5">
+            <h2 class="centered">Transaction History</h2>
+          <div class="history">
+            {% for x in trans %}
+              <p>
+              {{ x }}
+              </p>
+            {% endfor %}
+    </div>
+  </div>
 
-<h2>TRANSFER</h2>
-<form class="" action="{%  url 'transfer_create_view' %}" method="post">
-        {% csrf_token %}
-      {{ form }}
-      acc<input type="number" name="account" value="">
-      amount<input type="number" step=".01" name="amount" value="">
-      <input type="submit" name="" value="Submit">
 
-       </form>
-
-
-
-
-
-
+</div>
 {% endblock %}

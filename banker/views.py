@@ -73,5 +73,13 @@ class TransferCreateView(CreateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.trans_type = "+"
+        test = Account.objects.get(id=instance.account.id)
+        if not test:
+            instance.account = self.request.user.account
+        print(test)
+
+        if instance.amount < 0:
+            return super().form_invalid(form)
+
         Transaction.objects.create(trans_type='-', amount=instance.amount, account=self.request.user.account)
         return super().form_valid(form)

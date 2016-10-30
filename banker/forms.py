@@ -3,5 +3,5 @@ from banker.models import Transaction
 
 class TransferForm(forms.ModelForm):
     class Meta:
-        fields = ("account",)
+        fields = ("account", "amount")
         model = Transaction
