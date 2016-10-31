@@ -44,14 +44,18 @@
     <input type="submit" name="" value="Submit">
     </form>
 </div>
+<div class="row blank"></div>
+<div class="row profile_link">
+<a href="{% url 'transaction_list_create_api_view' %}">All Transactions</a>
+</div>
 </div>
   <div class="col-md-1">  </div>
     <div class="col-md-5">
             <h2 class="centered">Transaction History</h2>
           <div class="history">
-            {% for x in trans %}
+            {% for x in recent %}
               <p>
-              {{ x }}
+            {{ x.time }} {{ x.trans_type }} {{ x.amount }}
               </p>
             {% endfor %}
     </div>

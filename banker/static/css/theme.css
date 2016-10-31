@@ -24,10 +24,10 @@
 }
 
 .history {
-  padding-top: 10vh;
+  padding-top: 12vh;
   background-color: grey;
   color: black;
-  text-align: center;
+  padding-left: 10vh;
   font-size: 20px;
   height: 90vh;
   border: 2px solid black;
@@ -43,4 +43,24 @@
 
 .blank {
   height: 5vh;
+}
+
+.profile_link a:visited {
+  font-size: 30px;
+  color: black;
+  padding-top: 10px
+}
+
+.profile_link a:link {
+  font-size: 30px;
+  color: black;
+  padding-top: 10px
+}
+
+.profile_link {
+  background-color: lightblue;
+  border: 2px solid blue;
+  border-radius: 30px;
+  height: 20vh;
+  text-align: center;
 }

@@ -44,7 +44,10 @@ class ProfileView(ListView):
                     pass
                 else:
                     start = start - x.amount
-        x = balance(self.request.user)
+        flip = trans.order_by('-time')
+
+        recent = flip[:10]
+        context['recent'] = recent
         context['balance'] = start
         context['trans'] = trans
         return context
@@ -75,7 +78,7 @@ class TransferCreateView(CreateView):
         instance.trans_type = "+"
         test = Account.objects.get(id=instance.account.id)
         if not test:
-            instance.account = self.request.user.account
+            return super().form_invalid(form)
         print(test)
 
         if instance.amount < 0:
