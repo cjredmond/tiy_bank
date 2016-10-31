@@ -68,21 +68,21 @@ class TransactionCreateView(CreateView):
 
 class TransferCreateView(CreateView):
     model = Transaction
-    fields = ("amount", "account")
+    fields = ("amount",)
 
     def get_success_url(self):
         return reverse('profile_view')
 
     def form_valid(self, form):
+        target_account_number = self.request.POST.get("account")
+        target_account = Account.objects.get(id=target_account_number)
         instance = form.save(commit=False)
-        instance.trans_type = "+"
-        test = Account.objects.get(id=instance.account.id)
-        if not test:
-            return super().form_invalid(form)
-        print(test)
+        instance.trans_type = "-"
+        instance.account = self.request.user.account
+        
 
         if instance.amount < 0:
             return super().form_invalid(form)
 
-        Transaction.objects.create(trans_type='-', amount=instance.amount, account=self.request.user.account)
+        Transaction.objects.create(trans_type='+', amount=instance.amount, account=target_account)
         return super().form_valid(form)

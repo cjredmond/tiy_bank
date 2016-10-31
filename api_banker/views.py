@@ -22,4 +22,4 @@ class TransactionListCreateAPIView(ListCreateAPIView):
 class TransactionRetrieveAPIView(RetrieveAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
-    permission_classes = (BelongsTo,)
+    permission_classes = (BelongsTo, IsAuthenticated)
