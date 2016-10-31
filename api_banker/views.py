@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 from api_banker.serializers import TransactionSerializer
 from banker.models import Account, Transaction
 from api_banker.permissions import BelongsTo
@@ -18,7 +18,8 @@ class TransactionListCreateAPIView(ListCreateAPIView):
         serializer.save(account=self.request.user.account)
         return super().perform_create(serializer)
 
-class TransactionRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+
+class TransactionRetrieveAPIView(RetrieveAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     permission_classes = (BelongsTo,)
